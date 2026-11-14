@@ -20,3 +20,14 @@ export const HOURS: HoursData = {
   ],
   closures: [],
 };
+
+/** "09:00" -> "9am", "17:30" -> "5:30pm". */
+export function formatTime(t: string): string {
+  const [h0, m] = t.split(":").map(Number);
+  return `${h0 % 12 || 12}${m ? ":" + String(m).padStart(2, "0") : ""}${h0 < 12 ? "am" : "pm"}`;
+}
+
+/** Opening time range for a day, e.g. "9am–5pm", or "Closed". */
+export function formatHours([, opens, closes]: DayHours): string {
+  return opens && closes ? `${formatTime(opens)}–${formatTime(closes)}` : "Closed";
+}

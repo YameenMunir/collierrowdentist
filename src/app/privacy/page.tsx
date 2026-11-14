@@ -1,74 +1,28 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import PageHero from "@/components/PageHero";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Privacy Policy | Collier Row Dental Practice" },
+export const metadata: Metadata = pageMetadata({
+  title: "Privacy Policy | Collier Row Dental Practice",
   description: "Privacy, cookies and accessibility information for the Collier Row Dental Practice website.",
-  openGraph: { title: "Privacy Policy | Collier Row Dental Practice", description: "Privacy, cookies and accessibility information for the Collier Row Dental Practice website.", images: ["/img/hero.webp"] },
-};
+});
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.collierrowdentist.co.uk/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Privacy"
-      }
-    ]
-  }
-];
+const jsonLd = [breadcrumbJsonLd("privacy")];
 
 export default function Page() {
   return (
     <>
       <JsonLd data={jsonLd} />
       <main id="main">
-        <section className="scene-hero" aria-labelledby="ptitle">
-          <div className="bg" aria-hidden="true">
-            <img decoding="async" src="/img/hygiene.webp" alt="" style={{ objectPosition: "50% 50%" }} fetchPriority="high" />
-          </div>
-          <div className="letterbox top" aria-hidden="true"></div>
-          <div className="letterbox bot" aria-hidden="true"></div>
-          <div className="grain" aria-hidden="true"></div>
-          <div className="vignette" aria-hidden="true"></div>
-          <div className="wrap">
-            <nav aria-label="Breadcrumb" style={{ "--i": "0" }}>
-              <ol className="crumbs">
-                <li>
-                  <Link href="/">
-                    Home
-                  </Link>
-                </li>
-                <li aria-current="page">
-                  Privacy
-                </li>
-              </ol>
-            </nav>
-            <p className="scene-no" style={{ "--i": "1" }}>
-              Legal
-            </p>
-            <h1 className="h1" id="ptitle" style={{ "--i": "2" }}>
-              Privacy, cookies
-              {" "}
-              <em>
-                and accessibility
-              </em>
-            </h1>
-            <p className="lead" style={{ "--i": "3" }}>
-              How the practice handles your information on this website.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          route="privacy"
+          image="/img/hygiene.webp"
+          position="50% 50%"
+          eyebrow="Legal"
+          title={<>Privacy, cookies <em>and accessibility</em></>}
+          lead="How the practice handles your information on this website."
+        />
         <section className="section">
           <div className="wrap">
             <div className="legal">

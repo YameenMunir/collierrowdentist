@@ -1,127 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import PageHero from "@/components/PageHero";
+import { breadcrumbJsonLd, dentistJsonLd, pageMetadata } from "@/lib/seo";
+import { PRACTICE } from "@/lib/site";
+import HoursList from "@/components/HoursList";
+import OpenStatus from "@/components/OpenStatus";
 
-export const metadata: Metadata = {
-  title: { absolute: "Contact Collier Row Dental Practice | 01708 728715" },
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Collier Row Dental Practice | 01708 728715",
   description: "Contact Collier Row Dental Practice at 21 Collier Row Road, Romford RM5 3NR. Telephone 01708 728715. Parking, buses and directions.",
-  openGraph: { title: "Contact Collier Row Dental Practice | 01708 728715", description: "Contact Collier Row Dental Practice at 21 Collier Row Road, Romford RM5 3NR. Telephone 01708 728715. Parking, buses and directions.", images: ["/img/hero.webp"] },
-};
+});
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.collierrowdentist.co.uk/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Contact"
-      }
-    ]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Dentist",
-    "name": "Collier Row Dental Practice",
-    "url": "https://www.collierrowdentist.co.uk/",
-    "telephone": "+44 1708 728715",
-    "email": "collierrowdental@gmail.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "21 Collier Row Road",
-      "addressLocality": "Romford",
-      "addressRegion": "Essex",
-      "postalCode": "RM5 3NR",
-      "addressCountry": "GB"
-    },
-    "areaServed": "Collier Row, Romford",
-    "medicalSpecialty": [
-      "Orthodontic",
-      "Endodontic"
-    ],
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Monday",
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Tuesday",
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Wednesday",
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Thursday",
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Friday",
-        "opens": "09:00",
-        "closes": "17:00"
-      }
-    ]
-  }
-];
+const jsonLd = [breadcrumbJsonLd("contact"), dentistJsonLd()];
 
 export default function Page() {
   return (
     <>
       <JsonLd data={jsonLd} />
       <main id="main">
-        <section className="scene-hero" aria-labelledby="ptitle">
-          <div className="bg" aria-hidden="true">
-            <img decoding="async" src="/img/treatment.webp" alt="" style={{ objectPosition: "50% 35%" }} fetchPriority="high" />
-          </div>
-          <div className="letterbox top" aria-hidden="true"></div>
-          <div className="letterbox bot" aria-hidden="true"></div>
-          <div className="grain" aria-hidden="true"></div>
-          <div className="vignette" aria-hidden="true"></div>
-          <div className="wrap">
-            <nav aria-label="Breadcrumb" style={{ "--i": "0" }}>
-              <ol className="crumbs">
-                <li>
-                  <Link href="/">
-                    Home
-                  </Link>
-                </li>
-                <li aria-current="page">
-                  Contact
-                </li>
-              </ol>
-            </nav>
-            <p className="scene-no" style={{ "--i": "1" }}>
-              Contact
-            </p>
-            <h1 className="h1" id="ptitle" style={{ "--i": "2" }}>
-              Contact
-              {" "}
-              <em>
-                the practice
-              </em>
-            </h1>
-            <p className="lead" style={{ "--i": "3" }}>
-              Call, email or visit us at 21 Collier Row Road. For anything urgent, please call.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          route="contact"
+          image="/img/treatment.webp"
+          position="50% 35%"
+          eyebrow="Contact"
+          title={<>Contact <em>the practice</em></>}
+          lead="Call, email or visit us at 21 Collier Row Road. For anything urgent, please call."
+        />
         <section className="section">
           <div className="wrap">
             <div className="contact-grid">
@@ -173,70 +78,8 @@ export default function Page() {
                       Hours
                     </span>
                     <div>
-                      <p className="open-status in-list" data-open-status="">
-                        <span className="sdot" aria-hidden="true"></span>
-                        <span className="stext">
-                          Monday to Friday, 9am–5pm
-                        </span>
-                      </p>
-                      <ul className="hours">
-                        <li data-day="0">
-                          <span>
-                            Monday
-                          </span>
-                          <span className="num">
-                            9am–5pm
-                          </span>
-                        </li>
-                        <li data-day="1">
-                          <span>
-                            Tuesday
-                          </span>
-                          <span className="num">
-                            9am–5pm
-                          </span>
-                        </li>
-                        <li data-day="2">
-                          <span>
-                            Wednesday
-                          </span>
-                          <span className="num">
-                            9am–5pm
-                          </span>
-                        </li>
-                        <li data-day="3">
-                          <span>
-                            Thursday
-                          </span>
-                          <span className="num">
-                            9am–5pm
-                          </span>
-                        </li>
-                        <li data-day="4">
-                          <span>
-                            Friday
-                          </span>
-                          <span className="num">
-                            9am–5pm
-                          </span>
-                        </li>
-                        <li data-day="5">
-                          <span>
-                            Saturday
-                          </span>
-                          <span className="num">
-                            Closed
-                          </span>
-                        </li>
-                        <li data-day="6">
-                          <span>
-                            Sunday
-                          </span>
-                          <span className="num">
-                            Closed
-                          </span>
-                        </li>
-                      </ul>
+                      <OpenStatus className="in-list" />
+                      <HoursList />
                     </div>
                   </div>
                   <div className="drow">
@@ -259,12 +102,12 @@ export default function Page() {
                   </div>
                 </div>
                 <div className="vbtns">
-                  <a className="btn btn-solid" href="tel:+441708728715">
+                  <a className="btn btn-solid" href={PRACTICE.tel}>
                     Call the practice
                     {" "}
                     <span className="arr" aria-hidden="true"></span>
                   </a>
-                  <a className="btn btn-line" href={"https://www.google.com/maps/dir/?api=1&destination=21+Collier+Row+Road+Romford+RM5+3NR"} target="_blank" rel="noopener">
+                  <a className="btn btn-line" href={PRACTICE.maps.directions} target="_blank" rel="noopener">
                     Get directions
                   </a>
                 </div>

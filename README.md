@@ -24,7 +24,7 @@ If you'd like a website revamp, or a new website built for your company, get in 
 | Language | TypeScript (strict) |
 | Styling | The original hand-written CSS, kept as-is in `src/app/globals.css` |
 | Fonts | Newsreader, Hanken Grotesk, DM Mono (Google Fonts, same as the original) |
-| Rendering | Fully static: all 16 routes are prerendered at build time |
+| Rendering | Fully static: every route is prerendered at build time |
 
 **Why this stack:** the site is content-led and SEO-sensitive, so static prerendering gives fast first paint with no server to run. App Router layouts remove the header/footer duplicated across 15 HTML files. TypeScript and React make the interactive parts (status, slideshow, forms) maintainable. The design CSS stays untouched, so nothing about the look changes.
 
@@ -47,30 +47,50 @@ npm run typecheck  # tsc --noEmit
 
 ```
 .
-├── public/img/                  Photography (.webp) and logo/favicon SVGs
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx           Root layout: fonts, theme bootstrap, header, footer
-│   │   ├── globals.css          The original site stylesheet (plus footer, map and touch-target additions)
-│   │   ├── page.tsx             Home
-│   │   ├── not-found.tsx        404
-│   │   ├── location/page.tsx    Location: embedded Google Map, directions, parking and buses
-│   │   └── <route>/page.tsx     treatments, orthodontics, team, prices, referrals,
-│   │                            patient-information, contact, privacy, root-canal,
-│   │                            treatment-crowns / -dentures / -extractions / -implants
-│   ├── components/
-│   │   ├── SiteHeader.tsx       Header, nav and mobile menu drawer
-│   │   ├── SiteFooter.tsx       Footer
-│   │   ├── FloatingActions.tsx  Back-to-top button and mobile quick-contact bar
-│   │   ├── NavLink.tsx          Nav link that marks the current section
-│   │   ├── SiteBehavior.tsx     Mounts the shared interactions (client component)
-│   │   └── JsonLd.tsx           schema.org structured data
-│   ├── lib/
-│   │   ├── hours.ts             Opening hours and closure dates (typed)
-│   │   └── site-behavior.ts     Typed port of the original site.js
-│   └── types/css.d.ts           Allows CSS custom properties in inline styles
-└── original-static-site/        The untouched original static HTML/CSS/JS, for reference
+├── public/img/                       Photography (.webp) and logo/favicon SVGs
+├── next.config.ts                    Config, incl. 308 redirects from the old flat treatment URLs
+└── src/
+    ├── app/                          One folder per URL (App Router)
+    │   ├── layout.tsx                Root layout: fonts, theme bootstrap, header, footer
+    │   ├── globals.css               The original site stylesheet (plus footer, map and touch-target additions)
+    │   ├── page.tsx                  Home
+    │   ├── not-found.tsx             404
+    │   ├── treatments/
+    │   │   ├── page.tsx              /treatments (all treatments)
+    │   │   ├── crowns/ dentures/ extractions/ implants/ root-canal/
+    │   ├── orthodontics/  team/  prices/  referrals/  patient-information/
+    │   └── location/  contact/  privacy/
+    ├── components/
+    │   ├── SiteHeader.tsx            Header, nav and mobile menu drawer (rendered from lib/navigation)
+    │   ├── SiteFooter.tsx            Footer (rendered from lib/navigation, lib/site, lib/hours)
+    │   ├── PageHero.tsx              Cinematic inner-page hero with breadcrumbs
+    │   ├── CtaBand.tsx               Closing "Next scene" call-to-action band
+    │   ├── RelatedTreatments.tsx     "Related" strip on treatment pages
+    │   ├── HoursList.tsx             Weekly opening hours
+    │   ├── OpenStatus.tsx            Live open/closed indicator
+    │   ├── Logo.tsx                  Tooth mark + wordmark
+    │   ├── FloatingActions.tsx       Back-to-top button and mobile quick-contact bar
+    │   ├── NavLink.tsx               Nav link that marks the current section
+    │   ├── SiteBehavior.tsx          Mounts the shared interactions (client component)
+    │   └── JsonLd.tsx                schema.org structured data
+    ├── lib/
+    │   ├── site.ts                   Practice details: name, phone, email, address, map links
+    │   ├── routes.ts                 Site map: every URL, its breadcrumb label and parent page
+    │   ├── navigation.ts             Header, drawer and footer link lists
+    │   ├── seo.ts                    pageMetadata(), breadcrumb and Dentist JSON-LD builders
+    │   ├── hours.ts                  Opening hours, closure dates and time formatting
+    │   └── site-behavior.ts          Typed port of the original site.js
+    └── types/css.d.ts                Allows CSS custom properties in inline styles
 ```
+
+### Where to change things
+
+| To change… | Edit |
+| --- | --- |
+| Phone, email, address or map links | `src/lib/site.ts` (used by the header, footer, CTAs, contact/location pages and structured data) |
+| Opening hours or bank-holiday closures | `src/lib/hours.ts` (footer, contact, location, live status and JSON-LD all follow) |
+| Menu or footer links | `src/lib/navigation.ts` |
+| Add a page | Create `src/app/<path>/page.tsx`, register it in `src/lib/routes.ts`, then use `<PageHero route="…">`, `pageMetadata()` and `breadcrumbJsonLd()` |
 
 ## What changed, and what didn't
 
@@ -86,6 +106,7 @@ npm run typecheck  # tsc --noEmit
 - Per-page `<title>`, description and Open Graph tags use the Next.js Metadata API; JSON-LD (Dentist, breadcrumbs, FAQ) is preserved.
 - `site.js` became a typed module (`src/lib/site-behavior.ts`). It re-wires itself after each client-side navigation, and the preview-only in-frame navigation code was dropped because Next.js handles routing natively.
 - Opening hours moved from an embedded JSON `<script>` to `src/lib/hours.ts`. To mark a bank holiday as closed, add its date (`"2026-12-25"`) to `closures` there.
+- **Restructured code and URLs.** Treatment pages now sit under `/treatments/` (`/treatments/crowns`, `/treatments/root-canal`, …), and the old flat URLs (`/treatment-crowns`, `/root-canal`, …) redirect permanently. The repeated hero, CTA band, related strip, logo, hours list and status markup became shared components. Practice details, the route map and link lists each live in one file, and breadcrumbs (visible and JSON-LD) come from the route map. The rendered HTML of every page was diffed against the previous build: the only differences are the new treatment URLs and breadcrumb JSON-LD that now points at this site instead of the old `.html` pages.
 
 **How the conversion was verified:** the rendered `<main>` of all 15 original pages and the header were compared with the original HTML after normalising attribute order and whitespace, and they matched exactly (the header has since gained a Location link and the footer was redesigned on purpose). All pages were also checked at 320, 360, 390 and 768px wide for horizontal overflow and tap-target size. The home page was screenshot-compared against the original, and the interactions (theme toggle, menu drawer, hero slideshow, FAQ, team filter, form validation, client navigation, 404) were exercised in a real browser with no console or hydration errors.
 

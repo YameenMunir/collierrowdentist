@@ -7,7 +7,7 @@
  * unchanged. `createSite()` is called once (global listeners); `initPage()` is re-run after
  * every client-side navigation to wire up whatever the new page contains.
  */
-import { HOURS } from "./hours";
+import { formatTime as fmt, HOURS } from "./hours";
 
 type Cleanup = () => void;
 
@@ -15,12 +15,6 @@ const $ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document)
 const $$ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => [...r.querySelectorAll<T>(s)];
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const fmt = (t: string) => {
-  const [h0, m] = t.split(":").map(Number);
-  const s = h0 < 12 ? "am" : "pm";
-  const h = h0 % 12 || 12;
-  return h + (m ? ":" + String(m).padStart(2, "0") : "") + s;
-};
 const mins = (t: string) => {
   const [h, m] = t.split(":").map(Number);
   return h * 60 + m;

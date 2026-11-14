@@ -1,0 +1,20 @@
+import Link from "next/link";
+import { PRACTICE } from "@/lib/site";
+
+/** Practice logo (tooth mark + wordmark), linking home. `className` adds variants such as "small" or "on-navy". */
+export default function Logo({ className }: { className?: string }) {
+  return (
+    <Link className={`logo ${className ?? ""}`.trim()} href="/" aria-label={`${PRACTICE.name}, home`}>
+      <svg className="logo-mark" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="24" />
+        <g transform="translate(10.2 10.6) scale(1.15)">
+          <path d="M7.2 3C5 3 3.3 4.8 3.3 7.1c0 2 .8 3.4 1.4 5 .6 1.7.8 3.6 1.3 5.6.4 1.6.9 3.3 2 3.3 1.3 0 1.4-2 1.7-3.6.3-1.4.8-2.6 2.3-2.6s2 1.2 2.3 2.6c.3 1.6.4 3.6 1.7 3.6 1.1 0 1.6-1.7 2-3.3.5-2 .7-3.9 1.3-5.6.6-1.6 1.4-3 1.4-5C20.7 4.8 19 3 16.8 3c-1.8 0-2.8 1-4.8 1S9 3 7.2 3z" />
+        </g>
+      </svg>
+      <span className="logo-word">
+        <span className="l1">Collier Row</span>
+        <span className="l2">Dental Practice</span>
+      </span>
+    </Link>
+  );
+}

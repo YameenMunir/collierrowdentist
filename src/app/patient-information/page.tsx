@@ -1,31 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import CtaBand from "@/components/CtaBand";
+import PageHero from "@/components/PageHero";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Patient Information | Collier Row Dental Practice" },
+export const metadata: Metadata = pageMetadata({
+  title: "Patient Information | Collier Row Dental Practice",
   description: "What to bring to your appointment, emergency dental care, NHS charges and answers to common questions at Collier Row Dental Practice.",
-  openGraph: { title: "Patient Information | Collier Row Dental Practice", description: "What to bring to your appointment, emergency dental care, NHS charges and answers to common questions at Collier Row Dental Practice.", images: ["/img/hero.webp"] },
-};
+});
 
 const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.collierrowdentist.co.uk/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Patient information"
-      }
-    ]
-  },
+  breadcrumbJsonLd("patientInfo"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -95,42 +81,14 @@ export default function Page() {
     <>
       <JsonLd data={jsonLd} />
       <main id="main">
-        <section className="scene-hero" aria-labelledby="ptitle">
-          <div className="bg" aria-hidden="true">
-            <img decoding="async" src="/img/consult.webp" alt="" style={{ objectPosition: "70% 40%" }} fetchPriority="high" />
-          </div>
-          <div className="letterbox top" aria-hidden="true"></div>
-          <div className="letterbox bot" aria-hidden="true"></div>
-          <div className="grain" aria-hidden="true"></div>
-          <div className="vignette" aria-hidden="true"></div>
-          <div className="wrap">
-            <nav aria-label="Breadcrumb" style={{ "--i": "0" }}>
-              <ol className="crumbs">
-                <li>
-                  <Link href="/">
-                    Home
-                  </Link>
-                </li>
-                <li aria-current="page">
-                  Patient information
-                </li>
-              </ol>
-            </nav>
-            <p className="scene-no" style={{ "--i": "1" }}>
-              Patient information
-            </p>
-            <h1 className="h1" id="ptitle" style={{ "--i": "2" }}>
-              Before
-              {" "}
-              <em>
-                your visit
-              </em>
-            </h1>
-            <p className="lead" style={{ "--i": "3" }}>
-              Practical information for your appointment, emergencies and NHS charges.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          route="patientInfo"
+          image="/img/consult.webp"
+          position="70% 40%"
+          eyebrow="Patient information"
+          title={<>Before <em>your visit</em></>}
+          lead="Practical information for your appointment, emergencies and NHS charges."
+        />
         <section className="section">
           <div className="wrap article">
             <aside className="toc" aria-label="On this page">
@@ -320,33 +278,7 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <section className="cta">
-          <div className="wrap">
-            <p className="scene-no" data-reveal="">
-              Next scene
-            </p>
-            <h2 data-reveal="">
-              Ready when
-              {" "}
-              <em>
-                you are.
-              </em>
-            </h2>
-            <p data-reveal="">
-              Call the practice and the reception team will find a time that suits you.
-            </p>
-            <div className="btns" data-reveal="">
-              <a className="btn btn-solid" href="tel:+441708728715">
-                Call 01708 728715
-                {" "}
-                <span className="arr" aria-hidden="true"></span>
-              </a>
-              <Link className="btn btn-line" href="/contact">
-                Send an enquiry
-              </Link>
-            </div>
-          </div>
-        </section>
+        <CtaBand />
       </main>
     </>
   );

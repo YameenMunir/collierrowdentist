@@ -1,85 +1,28 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import CtaBand from "@/components/CtaBand";
+import PageHero from "@/components/PageHero";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Root Canal Treatment in Collier Row | Collier Row Dental Practice" },
+export const metadata: Metadata = pageMetadata({
+  title: "Root Canal Treatment in Collier Row | Collier Row Dental Practice",
   description: "Root canal treatment and endodontic referrals at Collier Row Dental Practice: what happens, how to prepare and what to expect afterwards.",
-  openGraph: { title: "Root Canal Treatment in Collier Row | Collier Row Dental Practice", description: "Root canal treatment and endodontic referrals at Collier Row Dental Practice: what happens, how to prepare and what to expect afterwards.", images: ["/img/hero.webp"] },
-};
+});
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.collierrowdentist.co.uk/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Treatments",
-        "item": "https://www.collierrowdentist.co.uk/treatments.html"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Root canal treatment"
-      }
-    ]
-  }
-];
+const jsonLd = [breadcrumbJsonLd("rootCanal")];
 
 export default function Page() {
   return (
     <>
       <JsonLd data={jsonLd} />
       <main id="main">
-        <section className="scene-hero" aria-labelledby="ptitle">
-          <div className="bg" aria-hidden="true">
-            <img decoding="async" src="/img/xray.webp" alt="" style={{ objectPosition: "50% 40%" }} fetchPriority="high" />
-          </div>
-          <div className="letterbox top" aria-hidden="true"></div>
-          <div className="letterbox bot" aria-hidden="true"></div>
-          <div className="grain" aria-hidden="true"></div>
-          <div className="vignette" aria-hidden="true"></div>
-          <div className="wrap">
-            <nav aria-label="Breadcrumb" style={{ "--i": "0" }}>
-              <ol className="crumbs">
-                <li>
-                  <Link href="/">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/treatments">
-                    Treatments
-                  </Link>
-                </li>
-                <li aria-current="page">
-                  Root canal treatment
-                </li>
-              </ol>
-            </nav>
-            <p className="scene-no" style={{ "--i": "1" }}>
-              Specialist care
-            </p>
-            <h1 className="h1" id="ptitle" style={{ "--i": "2" }}>
-              Root canal
-              {" "}
-              <em>
-                treatment
-              </em>
-            </h1>
-            <p className="lead" style={{ "--i": "3" }}>
-              When decay reaches the centre of the tooth, where the nerve sits, it can cause pain. Root canal treatment removes the infected nerve to relieve pain and swelling. It does not have to be painful.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          route="rootCanal"
+          image="/img/xray.webp"
+          eyebrow="Specialist care"
+          title={<>Root canal <em>treatment</em></>}
+          lead="When decay reaches the centre of the tooth, where the nerve sits, it can cause pain. Root canal treatment removes the infected nerve to relieve pain and swelling. It does not have to be painful."
+        />
         <section className="section">
           <div className="wrap article">
             <aside className="toc" aria-label="On this page">
@@ -286,33 +229,10 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <section className="cta">
-          <div className="wrap">
-            <p className="scene-no" data-reveal="">
-              Next scene
-            </p>
-            <h2 data-reveal="">
-              Questions about your
-              {" "}
-              <em>
-                referral?
-              </em>
-            </h2>
-            <p data-reveal="">
-              Call the practice and we will help with your appointment.
-            </p>
-            <div className="btns" data-reveal="">
-              <a className="btn btn-solid" href="tel:+441708728715">
-                Call 01708 728715
-                {" "}
-                <span className="arr" aria-hidden="true"></span>
-              </a>
-              <Link className="btn btn-line" href="/contact">
-                Send an enquiry
-              </Link>
-            </div>
-          </div>
-        </section>
+        <CtaBand
+          title={<>Questions about your <em>referral?</em></>}
+          text="Call the practice and we will help with your appointment."
+        />
       </main>
     </>
   );

@@ -1,74 +1,29 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import CtaBand from "@/components/CtaBand";
+import PageHero from "@/components/PageHero";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Dental Prices | Collier Row Dental Practice" },
+export const metadata: Metadata = pageMetadata({
+  title: "Dental Prices | Collier Row Dental Practice",
   description: "NHS dental charges from April 2026 at Collier Row Dental Practice: Band 1, Band 2, Band 3 and urgent care, plus independent treatment.",
-  openGraph: { title: "Dental Prices | Collier Row Dental Practice", description: "NHS dental charges from April 2026 at Collier Row Dental Practice: Band 1, Band 2, Band 3 and urgent care, plus independent treatment.", images: ["/img/hero.webp"] },
-};
+});
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.collierrowdentist.co.uk/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Prices"
-      }
-    ]
-  }
-];
+const jsonLd = [breadcrumbJsonLd("prices")];
 
 export default function Page() {
   return (
     <>
       <JsonLd data={jsonLd} />
       <main id="main">
-        <section className="scene-hero" aria-labelledby="ptitle">
-          <div className="bg" aria-hidden="true">
-            <img decoding="async" src="/img/implant.webp" alt="" style={{ objectPosition: "50% 45%" }} fetchPriority="high" />
-          </div>
-          <div className="letterbox top" aria-hidden="true"></div>
-          <div className="letterbox bot" aria-hidden="true"></div>
-          <div className="grain" aria-hidden="true"></div>
-          <div className="vignette" aria-hidden="true"></div>
-          <div className="wrap">
-            <nav aria-label="Breadcrumb" style={{ "--i": "0" }}>
-              <ol className="crumbs">
-                <li>
-                  <Link href="/">
-                    Home
-                  </Link>
-                </li>
-                <li aria-current="page">
-                  Prices
-                </li>
-              </ol>
-            </nav>
-            <p className="scene-no" style={{ "--i": "1" }}>
-              Prices
-            </p>
-            <h1 className="h1" id="ptitle" style={{ "--i": "2" }}>
-              Dental
-              {" "}
-              <em>
-                prices
-              </em>
-            </h1>
-            <p className="lead" style={{ "--i": "3" }}>
-              NHS dental charges from April 2026, and how independent treatment is priced.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          route="prices"
+          image="/img/implant.webp"
+          position="50% 45%"
+          eyebrow="Prices"
+          title={<>Dental <em>prices</em></>}
+          lead="NHS dental charges from April 2026, and how independent treatment is priced."
+        />
         <section className="section">
           <div className="wrap prices">
             <div className="left">
@@ -172,33 +127,10 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <section className="cta">
-          <div className="wrap">
-            <p className="scene-no" data-reveal="">
-              Next scene
-            </p>
-            <h2 data-reveal="">
-              Questions about
-              {" "}
-              <em>
-                cost?
-              </em>
-            </h2>
-            <p data-reveal="">
-              Your dentist explains the cost of any treatment before it begins. Call us if you have questions.
-            </p>
-            <div className="btns" data-reveal="">
-              <a className="btn btn-solid" href="tel:+441708728715">
-                Call 01708 728715
-                {" "}
-                <span className="arr" aria-hidden="true"></span>
-              </a>
-              <Link className="btn btn-line" href="/contact">
-                Send an enquiry
-              </Link>
-            </div>
-          </div>
-        </section>
+        <CtaBand
+          title={<>Questions about <em>cost?</em></>}
+          text="Your dentist explains the cost of any treatment before it begins. Call us if you have questions."
+        />
       </main>
     </>
   );

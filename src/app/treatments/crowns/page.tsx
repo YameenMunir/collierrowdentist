@@ -1,81 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import CtaBand from "@/components/CtaBand";
+import PageHero from "@/components/PageHero";
+import RelatedTreatments from "@/components/RelatedTreatments";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Dental Crowns in Collier Row | Collier Row Dental Practice" },
+export const metadata: Metadata = pageMetadata({
+  title: "Dental Crowns in Collier Row | Collier Row Dental Practice",
   description: "A crown is a metal or porcelain cap which sits over the tooth to either change the way it looks or to protect it from biting forces if it has been wea",
-  openGraph: { title: "Dental Crowns in Collier Row | Collier Row Dental Practice", description: "A crown is a metal or porcelain cap which sits over the tooth to either change the way it looks or to protect it from biting forces if it has been wea", images: ["/img/hero.webp"] },
-};
+});
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.collierrowdentist.co.uk/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Treatments",
-        "item": "https://www.collierrowdentist.co.uk/treatments.html"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Dental crowns"
-      }
-    ]
-  }
-];
+const jsonLd = [breadcrumbJsonLd("crowns")];
 
 export default function Page() {
   return (
     <>
       <JsonLd data={jsonLd} />
       <main id="main">
-        <section className="scene-hero" aria-labelledby="ptitle">
-          <div className="bg" aria-hidden="true">
-            <img decoding="async" src="/img/implant.webp" alt="" style={{ objectPosition: "50% 40%" }} fetchPriority="high" />
-          </div>
-          <div className="letterbox top" aria-hidden="true"></div>
-          <div className="letterbox bot" aria-hidden="true"></div>
-          <div className="grain" aria-hidden="true"></div>
-          <div className="vignette" aria-hidden="true"></div>
-          <div className="wrap">
-            <nav aria-label="Breadcrumb" style={{ "--i": "0" }}>
-              <ol className="crumbs">
-                <li>
-                  <Link href="/">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/treatments">
-                    Treatments
-                  </Link>
-                </li>
-                <li aria-current="page">
-                  Dental crowns
-                </li>
-              </ol>
-            </nav>
-            <p className="scene-no" style={{ "--i": "1" }}>
-              Treatment
-            </p>
-            <h1 className="h1" id="ptitle" style={{ "--i": "2" }}>
-              Dental crowns
-            </h1>
-            <p className="lead" style={{ "--i": "3" }}>
-              A crown is a metal or porcelain cap which sits over the tooth to either change the way it looks or to protect it from biting forces if it has been weakened by decay.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          route="crowns"
+          image="/img/implant.webp"
+          eyebrow="Treatment"
+          title="Dental crowns"
+          lead="A crown is a metal or porcelain cap which sits over the tooth to either change the way it looks or to protect it from biting forces if it has been weakened by decay."
+        />
         <section className="section">
           <div className="wrap article">
             <aside className="toc" aria-label="On this page">
@@ -178,66 +127,8 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <section className="section tint" style={{ paddingBlock: "clamp(3rem,6vw,5rem)" }}>
-          <div className="wrap">
-            <p className="label brand" data-reveal="" style={{ marginBottom: "1.5rem" }}>
-              Related
-            </p>
-            <div className="related">
-              <Link href="/treatment-implants" data-reveal="">
-                <b>
-                  Dental implants
-                </b>
-                <span>
-                  Implants are screws placed in the bone, on which crowns or dentures can be fitted to…
-                </span>
-              </Link>
-              <Link href="/treatment-dentures" data-reveal="">
-                <b>
-                  Dentures
-                </b>
-                <span>
-                  There are many options for replacing missing teeth. The most common is a denture (plate)…
-                </span>
-              </Link>
-              <Link href="/treatments" data-reveal="">
-                <b>
-                  All treatments
-                </b>
-                <span>
-                  General, restorative, cosmetic and specialist care.
-                </span>
-              </Link>
-            </div>
-          </div>
-        </section>
-        <section className="cta">
-          <div className="wrap">
-            <p className="scene-no" data-reveal="">
-              Next scene
-            </p>
-            <h2 data-reveal="">
-              Ready when
-              {" "}
-              <em>
-                you are.
-              </em>
-            </h2>
-            <p data-reveal="">
-              Call the practice and the reception team will find a time that suits you.
-            </p>
-            <div className="btns" data-reveal="">
-              <a className="btn btn-solid" href="tel:+441708728715">
-                Call 01708 728715
-                {" "}
-                <span className="arr" aria-hidden="true"></span>
-              </a>
-              <Link className="btn btn-line" href="/contact">
-                Send an enquiry
-              </Link>
-            </div>
-          </div>
-        </section>
+        <RelatedTreatments items={["implants", "dentures"]} />
+        <CtaBand />
       </main>
     </>
   );

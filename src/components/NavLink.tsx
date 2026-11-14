@@ -6,12 +6,11 @@ import type { ComponentProps } from "react";
 
 /**
  * Nav link that marks itself as the current section (aria-current="true"),
- * using the same rule as the original site: treatment sub-pages and
- * root canal both highlight "Treatments".
+ * so pages under /treatments/ (crowns, implants, root canal…) highlight "Treatments".
  */
 function sectionFor(pathname: string): string {
   const p = pathname.replace(/\/$/, "") || "/";
-  if (p.startsWith("/treatment") || p === "/root-canal") return "/treatments";
+  if (p.startsWith("/treatments/")) return "/treatments";
   return p;
 }
 

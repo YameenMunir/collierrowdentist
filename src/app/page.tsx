@@ -1,68 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import CtaBand from "@/components/CtaBand";
+import HoursList from "@/components/HoursList";
+import OpenStatus from "@/components/OpenStatus";
+import { ROUTES } from "@/lib/routes";
+import { dentistJsonLd, pageMetadata } from "@/lib/seo";
+import { PRACTICE } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: { absolute: "Dentist in Collier Row | Collier Row Dental Practice" },
-  description: "Collier Row Dental Practice, 21 Collier Row Road, RM5 3NR. NHS and independent family dentistry with specialist orthodontics and root canal treatment. Call 01708 728715.",
-  openGraph: { title: "Dentist in Collier Row | Collier Row Dental Practice", description: "Collier Row Dental Practice, 21 Collier Row Road, RM5 3NR. NHS and independent family dentistry with specialist orthodontics and root canal treatment. Call 01708 728715.", images: ["/img/hero.webp"] },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Dentist in Collier Row | Collier Row Dental Practice",
+  description:
+    "Collier Row Dental Practice, 21 Collier Row Road, RM5 3NR. NHS and independent family dentistry with specialist orthodontics and root canal treatment. Call 01708 728715.",
+});
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Dentist",
-    "name": "Collier Row Dental Practice",
-    "url": "https://www.collierrowdentist.co.uk/",
-    "telephone": "+44 1708 728715",
-    "email": "collierrowdental@gmail.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "21 Collier Row Road",
-      "addressLocality": "Romford",
-      "addressRegion": "Essex",
-      "postalCode": "RM5 3NR",
-      "addressCountry": "GB"
-    },
-    "areaServed": "Collier Row, Romford",
-    "medicalSpecialty": [
-      "Orthodontic",
-      "Endodontic"
-    ],
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Monday",
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Tuesday",
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Wednesday",
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Thursday",
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Friday",
-        "opens": "09:00",
-        "closes": "17:00"
-      }
-    ]
-  }
-];
+const jsonLd = [dentistJsonLd()];
 
 export default function Page() {
   return (
@@ -176,7 +128,7 @@ export default function Page() {
               <p className="h3-card-label">
                 Get in touch
               </p>
-              <a className="h3-row" href="tel:+441708728715">
+              <a className="h3-row" href={PRACTICE.tel}>
                 <span>
                   Call the practice
                 </span>
@@ -184,7 +136,7 @@ export default function Page() {
                   01708 728715
                 </b>
               </a>
-              <a className="h3-row" href={"https://www.google.com/maps/dir/?api=1&destination=21+Collier+Row+Road+Romford+RM5+3NR"} target="_blank" rel="noopener">
+              <a className="h3-row" href={PRACTICE.maps.directions} target="_blank" rel="noopener">
                 <span>
                   Find us
                 </span>
@@ -612,7 +564,7 @@ export default function Page() {
                     </p>
                   </div>
                 </Link>
-                <Link className="reel-card" href="/root-canal">
+                <Link className="reel-card" href={ROUTES.rootCanal.path}>
                   <img decoding="async" src="/img/xray.webp" alt="" style={{ objectPosition: "55% 50%" }} loading="lazy" />
                   <span className="go" aria-hidden="true"></span>
                   <div className="rc">
@@ -627,7 +579,7 @@ export default function Page() {
                     </p>
                   </div>
                 </Link>
-                <Link className="reel-card" href="/treatment-implants">
+                <Link className="reel-card" href={ROUTES.implants.path}>
                   <img decoding="async" src="/img/implant.webp" alt="" style={{ objectPosition: "50% 50%" }} loading="lazy" />
                   <span className="go" aria-hidden="true"></span>
                   <div className="rc">
@@ -642,7 +594,7 @@ export default function Page() {
                     </p>
                   </div>
                 </Link>
-                <Link className="reel-card" href="/treatment-dentures">
+                <Link className="reel-card" href={ROUTES.dentures.path}>
                   <img decoding="async" src="/img/surgery.webp" alt="" style={{ objectPosition: "60% 50%" }} loading="lazy" />
                   <span className="go" aria-hidden="true"></span>
                   <div className="rc">
@@ -721,7 +673,7 @@ export default function Page() {
                   Professional cleaning and gum care
                 </span>
               </Link>
-              <Link href="/treatment-crowns">
+              <Link href={ROUTES.crowns.path}>
                 <b>
                   Crowns &amp; bridges
                 </b>
@@ -730,7 +682,7 @@ export default function Page() {
                 </span>
                 <em className="go" aria-hidden="true"></em>
               </Link>
-              <Link href="/treatment-implants">
+              <Link href={ROUTES.implants.path}>
                 <b>
                   Dental implants
                 </b>
@@ -739,7 +691,7 @@ export default function Page() {
                 </span>
                 <em className="go" aria-hidden="true"></em>
               </Link>
-              <Link href="/treatment-dentures">
+              <Link href={ROUTES.dentures.path}>
                 <b>
                   Dentures
                 </b>
@@ -775,7 +727,7 @@ export default function Page() {
                   Specialist
                 </i>
               </Link>
-              <Link href="/root-canal">
+              <Link href={ROUTES.rootCanal.path}>
                 <b>
                   Root canal treatment
                 </b>
@@ -786,7 +738,7 @@ export default function Page() {
                   Specialist
                 </i>
               </Link>
-              <Link href="/treatment-extractions">
+              <Link href={ROUTES.extractions.path}>
                 <b>
                   Extractions
                 </b>
@@ -852,7 +804,7 @@ export default function Page() {
                     <p>
                       Our two endodontists' practice is limited to root canal treatment. Treatment takes around 60 to 90 minutes and may need more than one visit.
                     </p>
-                    <Link className="tlink" href="/root-canal">
+                    <Link className="tlink" href={ROUTES.rootCanal.path}>
                       Root canal treatment
                     </Link>
                   </div>
@@ -1153,70 +1105,8 @@ export default function Page() {
                     Hours
                   </span>
                   <div>
-                    <p className="open-status in-list" data-open-status="">
-                      <span className="sdot" aria-hidden="true"></span>
-                      <span className="stext">
-                        Monday to Friday, 9am–5pm
-                      </span>
-                    </p>
-                    <ul className="hours">
-                      <li data-day="0">
-                        <span>
-                          Monday
-                        </span>
-                        <span className="num">
-                          9am–5pm
-                        </span>
-                      </li>
-                      <li data-day="1">
-                        <span>
-                          Tuesday
-                        </span>
-                        <span className="num">
-                          9am–5pm
-                        </span>
-                      </li>
-                      <li data-day="2">
-                        <span>
-                          Wednesday
-                        </span>
-                        <span className="num">
-                          9am–5pm
-                        </span>
-                      </li>
-                      <li data-day="3">
-                        <span>
-                          Thursday
-                        </span>
-                        <span className="num">
-                          9am–5pm
-                        </span>
-                      </li>
-                      <li data-day="4">
-                        <span>
-                          Friday
-                        </span>
-                        <span className="num">
-                          9am–5pm
-                        </span>
-                      </li>
-                      <li data-day="5">
-                        <span>
-                          Saturday
-                        </span>
-                        <span className="num">
-                          Closed
-                        </span>
-                      </li>
-                      <li data-day="6">
-                        <span>
-                          Sunday
-                        </span>
-                        <span className="num">
-                          Closed
-                        </span>
-                      </li>
-                    </ul>
+                    <OpenStatus className="in-list" />
+                    <HoursList />
                   </div>
                 </div>
                 <div className="drow">
@@ -1239,45 +1129,19 @@ export default function Page() {
                 </div>
               </div>
               <div className="vbtns">
-                <a className="btn btn-solid" href="tel:+441708728715">
+                <a className="btn btn-solid" href={PRACTICE.tel}>
                   Call the practice
                   {" "}
                   <span className="arr" aria-hidden="true"></span>
                 </a>
-                <a className="btn btn-line" href={"https://www.google.com/maps/dir/?api=1&destination=21+Collier+Row+Road+Romford+RM5+3NR"} target="_blank" rel="noopener">
+                <a className="btn btn-line" href={PRACTICE.maps.directions} target="_blank" rel="noopener">
                   Get directions
                 </a>
               </div>
             </div>
           </div>
         </section>
-        <section className="cta">
-          <div className="wrap">
-            <p className="scene-no" data-reveal="">
-              Next scene
-            </p>
-            <h2 data-reveal="">
-              Ready when
-              {" "}
-              <em>
-                you are.
-              </em>
-            </h2>
-            <p data-reveal="">
-              Call the practice and the reception team will find a time that suits you.
-            </p>
-            <div className="btns" data-reveal="">
-              <a className="btn btn-solid" href="tel:+441708728715">
-                Call 01708 728715
-                {" "}
-                <span className="arr" aria-hidden="true"></span>
-              </a>
-              <Link className="btn btn-line" href="/contact">
-                Send an enquiry
-              </Link>
-            </div>
-          </div>
-        </section>
+        <CtaBand />
       </main>
     </>
   );

@@ -1,74 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import CtaBand from "@/components/CtaBand";
+import PageHero from "@/components/PageHero";
+import { ROUTES } from "@/lib/routes";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Dental Treatments in Collier Row | Collier Row Dental Practice" },
+export const metadata: Metadata = pageMetadata({
+  title: "Dental Treatments in Collier Row | Collier Row Dental Practice",
   description: "General, restorative, cosmetic and specialist dental treatments at Collier Row Dental Practice, including fillings, crowns, implants, dentures, braces and root canal treatment.",
-  openGraph: { title: "Dental Treatments in Collier Row | Collier Row Dental Practice", description: "General, restorative, cosmetic and specialist dental treatments at Collier Row Dental Practice, including fillings, crowns, implants, dentures, braces and root canal treatment.", images: ["/img/hero.webp"] },
-};
+});
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.collierrowdentist.co.uk/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Treatments"
-      }
-    ]
-  }
-];
+const jsonLd = [breadcrumbJsonLd("treatments")];
 
 export default function Page() {
   return (
     <>
       <JsonLd data={jsonLd} />
       <main id="main">
-        <section className="scene-hero" aria-labelledby="ptitle">
-          <div className="bg" aria-hidden="true">
-            <img decoding="async" src="/img/consult.webp" alt="" style={{ objectPosition: "50% 40%" }} fetchPriority="high" />
-          </div>
-          <div className="letterbox top" aria-hidden="true"></div>
-          <div className="letterbox bot" aria-hidden="true"></div>
-          <div className="grain" aria-hidden="true"></div>
-          <div className="vignette" aria-hidden="true"></div>
-          <div className="wrap">
-            <nav aria-label="Breadcrumb" style={{ "--i": "0" }}>
-              <ol className="crumbs">
-                <li>
-                  <Link href="/">
-                    Home
-                  </Link>
-                </li>
-                <li aria-current="page">
-                  Treatments
-                </li>
-              </ol>
-            </nav>
-            <p className="scene-no" style={{ "--i": "1" }}>
-              Treatments
-            </p>
-            <h1 className="h1" id="ptitle" style={{ "--i": "2" }}>
-              Dental treatments in
-              {" "}
-              <em>
-                Collier Row
-              </em>
-            </h1>
-            <p className="lead" style={{ "--i": "3" }}>
-              We offer a wide range of treatments, from general dental services to more complex care. If the treatment you need is not listed, contact us and we will advise you on how to proceed.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          route="treatments"
+          image="/img/consult.webp"
+          eyebrow="Treatments"
+          title={<>Dental treatments in <em>Collier Row</em></>}
+          lead="We offer a wide range of treatments, from general dental services to more complex care. If the treatment you need is not listed, contact us and we will advise you on how to proceed."
+        />
         <section className="section">
           <div className="wrap">
             <section id="general" className="tgroup">
@@ -100,7 +56,7 @@ export default function Page() {
                     Professional cleaning and gum care
                   </span>
                 </Link>
-                <Link href="/treatment-extractions">
+                <Link href={ROUTES.extractions.path}>
                   <b>
                     Extractions
                   </b>
@@ -124,7 +80,7 @@ export default function Page() {
                 Restoring and replacing teeth
               </h2>
               <div className="index one" data-reveal="">
-                <Link href="/treatment-crowns">
+                <Link href={ROUTES.crowns.path}>
                   <b>
                     Crowns &amp; bridges
                   </b>
@@ -133,7 +89,7 @@ export default function Page() {
                   </span>
                   <em className="go" aria-hidden="true"></em>
                 </Link>
-                <Link href="/treatment-implants">
+                <Link href={ROUTES.implants.path}>
                   <b>
                     Dental implants
                   </b>
@@ -142,7 +98,7 @@ export default function Page() {
                   </span>
                   <em className="go" aria-hidden="true"></em>
                 </Link>
-                <Link href="/treatment-dentures">
+                <Link href={ROUTES.dentures.path}>
                   <b>
                     Dentures
                   </b>
@@ -192,7 +148,7 @@ export default function Page() {
                     Specialist
                   </i>
                 </Link>
-                <Link href="/root-canal">
+                <Link href={ROUTES.rootCanal.path}>
                   <b>
                     Root canal treatment
                   </b>
@@ -215,33 +171,7 @@ export default function Page() {
             </p>
           </div>
         </section>
-        <section className="cta">
-          <div className="wrap">
-            <p className="scene-no" data-reveal="">
-              Next scene
-            </p>
-            <h2 data-reveal="">
-              Ready when
-              {" "}
-              <em>
-                you are.
-              </em>
-            </h2>
-            <p data-reveal="">
-              Call the practice and the reception team will find a time that suits you.
-            </p>
-            <div className="btns" data-reveal="">
-              <a className="btn btn-solid" href="tel:+441708728715">
-                Call 01708 728715
-                {" "}
-                <span className="arr" aria-hidden="true"></span>
-              </a>
-              <Link className="btn btn-line" href="/contact">
-                Send an enquiry
-              </Link>
-            </div>
-          </div>
-        </section>
+        <CtaBand />
       </main>
     </>
   );

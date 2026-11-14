@@ -1,74 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import CtaBand from "@/components/CtaBand";
+import PageHero from "@/components/PageHero";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Orthodontist in Collier Row | Collier Row Dental Practice" },
+export const metadata: Metadata = pageMetadata({
+  title: "Orthodontist in Collier Row | Collier Row Dental Practice",
   description: "Braces, aligners and lingual braces at Collier Row Dental Practice. Information for NHS orthodontic patients, eligibility and independent treatment.",
-  openGraph: { title: "Orthodontist in Collier Row | Collier Row Dental Practice", description: "Braces, aligners and lingual braces at Collier Row Dental Practice. Information for NHS orthodontic patients, eligibility and independent treatment.", images: ["/img/hero.webp"] },
-};
+});
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.collierrowdentist.co.uk/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Orthodontics"
-      }
-    ]
-  }
-];
+const jsonLd = [breadcrumbJsonLd("orthodontics")];
 
 export default function Page() {
   return (
     <>
       <JsonLd data={jsonLd} />
       <main id="main">
-        <section className="scene-hero" aria-labelledby="ptitle">
-          <div className="bg" aria-hidden="true">
-            <img decoding="async" src="/img/scanner.webp" alt="" style={{ objectPosition: "50% 40%" }} fetchPriority="high" />
-          </div>
-          <div className="letterbox top" aria-hidden="true"></div>
-          <div className="letterbox bot" aria-hidden="true"></div>
-          <div className="grain" aria-hidden="true"></div>
-          <div className="vignette" aria-hidden="true"></div>
-          <div className="wrap">
-            <nav aria-label="Breadcrumb" style={{ "--i": "0" }}>
-              <ol className="crumbs">
-                <li>
-                  <Link href="/">
-                    Home
-                  </Link>
-                </li>
-                <li aria-current="page">
-                  Orthodontics
-                </li>
-              </ol>
-            </nav>
-            <p className="scene-no" style={{ "--i": "1" }}>
-              Specialist care
-            </p>
-            <h1 className="h1" id="ptitle" style={{ "--i": "2" }}>
-              Orthodontics in
-              {" "}
-              <em>
-                Collier Row
-              </em>
-            </h1>
-            <p className="lead" style={{ "--i": "3" }}>
-              Orthodontics (braces) are used to straighten crooked teeth. We offer aesthetic braces, near-invisible aligners and lingual braces, on the NHS where eligible and independently.
-            </p>
-          </div>
-        </section>
+        <PageHero
+          route="orthodontics"
+          image="/img/scanner.webp"
+          eyebrow="Specialist care"
+          title={<>Orthodontics in <em>Collier Row</em></>}
+          lead="Orthodontics (braces) are used to straighten crooked teeth. We offer aesthetic braces, near-invisible aligners and lingual braces, on the NHS where eligible and independently."
+        />
         <section className="section">
           <div className="wrap article">
             <aside className="toc" aria-label="On this page">
@@ -258,33 +213,10 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <section className="cta">
-          <div className="wrap">
-            <p className="scene-no" data-reveal="">
-              Next scene
-            </p>
-            <h2 data-reveal="">
-              Interested in
-              {" "}
-              <em>
-                braces?
-              </em>
-            </h2>
-            <p data-reveal="">
-              Talk to your dentist about a referral, or call us to ask about independent orthodontic treatment.
-            </p>
-            <div className="btns" data-reveal="">
-              <a className="btn btn-solid" href="tel:+441708728715">
-                Call 01708 728715
-                {" "}
-                <span className="arr" aria-hidden="true"></span>
-              </a>
-              <Link className="btn btn-line" href="/contact">
-                Send an enquiry
-              </Link>
-            </div>
-          </div>
-        </section>
+        <CtaBand
+          title={<>Interested in <em>braces?</em></>}
+          text="Talk to your dentist about a referral, or call us to ask about independent orthodontic treatment."
+        />
       </main>
     </>
   );
