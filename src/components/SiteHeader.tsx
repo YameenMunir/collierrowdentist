@@ -55,6 +55,11 @@ export default function SiteHeader() {
               </NavLink>
             </li>
             <li>
+              <NavLink href="/location">
+                Location
+              </NavLink>
+            </li>
+            <li>
               <NavLink href="/contact">
                 Contact
               </NavLink>
@@ -146,7 +151,12 @@ export default function SiteHeader() {
           </NavLink>
         </li>
         <li>
-          <NavLink style={{ "--i": "6" }} href="/contact">
+          <NavLink style={{ "--i": "6" }} href="/location">
+            Location
+          </NavLink>
+        </li>
+        <li>
+          <NavLink style={{ "--i": "7" }} href="/contact">
             Contact
           </NavLink>
         </li>

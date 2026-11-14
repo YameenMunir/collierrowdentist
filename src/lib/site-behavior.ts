@@ -347,7 +347,7 @@ export function createSite() {
         });
         io.unobserve(e.target);
       }), { rootMargin: "0px 0px -8% 0px", threshold: 0 });
-      $$("main [data-reveal]").forEach((el) => {
+      $$("main [data-reveal], .footer [data-reveal]").forEach((el) => {
         if (el.getBoundingClientRect().top > innerHeight * 0.9) {
           el.classList.add("pre");
           if (el.id === "journey") el.style.setProperty("--p", "0");
