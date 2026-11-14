@@ -86,7 +86,6 @@ export default function Page() {
           <div className="letterbox bot" aria-hidden="true"></div>
           <div className="grain" aria-hidden="true"></div>
           <div className="vignette" aria-hidden="true"></div>
-          <div className="scroll-cue" aria-hidden="true"></div>
           <div className="h3-inner">
             <div className="h3-copy">
               <p className="h3-label">

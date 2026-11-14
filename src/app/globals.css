@@ -238,9 +238,6 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .h3-pause svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .h3-pause .i-play{display:none}
 .hero3.paused .h3-pause .i-play{display:block}.hero3.paused .h3-pause .i-pause{display:none}
-.scroll-cue{position:absolute;left:50%;bottom:clamp(5.5rem,12vh,7rem);z-index:4;width:1px;height:46px;background:rgba(255,255,255,.18);overflow:hidden;display:none}
-.scroll-cue::after{content:"";position:absolute;left:0;top:0;width:1px;height:40%;background:#fff;animation:cue 2.2s var(--ease-io) infinite}
-@keyframes cue{from{transform:translate3d(0,-100%,0)}to{transform:translate3d(0,260%,0)}}
 
 /* Entrance */
 .motion .h3-media{animation:fadeIn 2s var(--ease) both}
@@ -281,7 +278,6 @@ html.menu-open,html.menu-open body{overflow:hidden}
   .h3-dot .cap{font-size:0}.h3-dot .cap b{font-size:.72rem}
   .letterbox{height:7vh}
 }
-@media (min-width:1101px) and (min-height:760px){.scroll-cue{display:block}}
 
 /* ---------- Ticker (opening credits) ---------- */
 .ticker{overflow:hidden;border-block:1px solid var(--line);background:var(--bg);padding-block:1.4rem;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
@@ -818,7 +814,7 @@ html.menu-open .totop{opacity:0;pointer-events:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
-  .letterbox,.grain,.scroll-cue,.frame::after{display:none}
+  .letterbox,.grain,.frame::after{display:none}
   .pre,.frame.pre,.split.pre .w>span{opacity:1;transform:none}
   .lightup .lw{opacity:1}
   .sda .scene-statement,.sda .reel{height:auto}
