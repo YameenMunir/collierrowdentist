@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
+import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { PRACTICE } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Orthodontic and Endodontic Referrals | Collier Row Dental Practice",
@@ -52,7 +53,7 @@ export default function Page() {
                 <p>
                   NHS and private referrals for root canal treatment. Referrals for treatment under the NHS must be made through the Level 2 endodontic referral pathway.
                 </p>
-                <Link className="tlink" href="/root-canal#referred">
+                <Link className="tlink" href={`${ROUTES.rootCanal.path}#referred`}>
                   What your patient can expect
                 </Link>
               </article>
@@ -88,11 +89,15 @@ export default function Page() {
                   <p data-reveal="">
                     Call the practice on
                     {" "}
-                    <span className="num">
-                      01708 728715
-                    </span>
+                    <a className="num" href={PRACTICE.tel}>
+                      {PRACTICE.phone}
+                    </a>
                     {" "}
-                    or email collierrowdental@gmail.com for referral details.
+                    or email
+                    {" "}
+                    <a href={PRACTICE.mailto}>{PRACTICE.email}</a>
+                    {" "}
+                    for referral details.
                     <span className="verify">
                       Referral form to be supplied
                     </span>
@@ -102,10 +107,6 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <CtaBand
-          title={<>Refer a <em>patient</em></>}
-          text="Contact the practice for referral details."
-        />
       </main>
     </>
   );

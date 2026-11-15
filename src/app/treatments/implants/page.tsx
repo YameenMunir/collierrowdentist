@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
+import ArticleAside from "@/components/ArticleAside";
 import PageHero from "@/components/PageHero";
 import RelatedTreatments from "@/components/RelatedTreatments";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Dental Implants in Collier Row | Collier Row Dental Practice",
-  description: "Implants are screws placed in the bone, on which crowns or dentures can be fitted to replace missing teeth.",
+  description: "Dental implants at Collier Row Dental Practice: how referral, placement and healing work, and how long treatment takes to replace a missing tooth.",
 });
 
 const jsonLd = [breadcrumbJsonLd("implants")];
@@ -27,38 +26,21 @@ export default function Page() {
         />
         <section className="section">
           <div className="wrap article">
-            <aside className="toc" aria-label="On this page">
-              <p className="label">
-                On this page
-              </p>
-              <a href="#overview">
-                Overview
-              </a>
-              <a href="#what-happens">
-                What happens
-              </a>
-              <a href="#cost">
-                Cost
-              </a>
-            </aside>
+            <ArticleAside
+              facts={[
+                { label: "First step", value: "Ask your dentist, who can refer you" },
+                { label: "Timescale", value: "A few months, while the bone heals" },
+                { label: "Cost", value: "Depends on your case. Ask the practice" },
+              ]}
+            />
             <div className="prose">
-              <section id="overview">
-                <h2 data-reveal="">
-                  Overview
-                </h2>
-                <p data-reveal="">
-                  Implants are screws placed in the bone, on which crowns or dentures can be fitted to replace missing teeth.
-                </p>
-                <p className="callout" data-reveal="">
-                  <span>
-                    If you are keen to pursue this option, discuss it with your dentist, who can refer you to someone trained in implants. Procedures vary greatly from case to case.
-                  </span>
-                </p>
-              </section>
               <section id="what-happens">
                 <h2 data-reveal="">
                   What happens
                 </h2>
+                <p data-reveal="">
+                  Procedures vary greatly from case to case, so your dentist will talk you through yours.
+                </p>
                 <ol className="steps">
                   <li data-reveal="">
                     <div>
@@ -102,23 +84,10 @@ export default function Page() {
                   </li>
                 </ol>
               </section>
-              <section id="cost">
-                <h2 data-reveal="">
-                  Cost
-                </h2>
-                <p data-reveal="">
-                  Ask the practice about the cost of implant treatment for your case.
-                  {" "}
-                  <Link className="tlink" href="/prices">
-                    See NHS charges
-                  </Link>
-                </p>
-              </section>
             </div>
           </div>
         </section>
         <RelatedTreatments items={["crowns", "dentures"]} />
-        <CtaBand />
       </main>
     </>
   );

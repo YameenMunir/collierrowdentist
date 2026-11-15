@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
 import HoursList from "@/components/HoursList";
 import OpenStatus from "@/components/OpenStatus";
 import { ROUTES } from "@/lib/routes";
@@ -109,20 +108,6 @@ export default function Page() {
                   Explore treatments
                 </Link>
               </div>
-              <ul className="h3-points">
-                <li>
-                  Specialist orthodontist
-                </li>
-                <li>
-                  Two endodontists
-                </li>
-                <li>
-                  Sedation for nervous patients
-                </li>
-                <li>
-                  Ground-floor access
-                </li>
-              </ul>
             </div>
             <aside className="h3-card" aria-label="Contact the practice">
               <p className="h3-card-label">
@@ -210,106 +195,6 @@ export default function Page() {
             </button>
           </div>
         </section>
-        <div className="ticker" aria-hidden="true">
-          <div className="ticker-track">
-            <span>
-              Tooth-coloured fillings
-            </span>
-            <i></i>
-            <span>
-              Preventive dentistry
-            </span>
-            <i></i>
-            <span>
-              Hygienist services
-            </span>
-            <i></i>
-            <span>
-              Crowns &amp; bridges
-            </span>
-            <i></i>
-            <span>
-              Dental implants
-            </span>
-            <i></i>
-            <span>
-              Dentures
-            </span>
-            <i></i>
-            <span>
-              Cosmetic dentistry
-            </span>
-            <i></i>
-            <span>
-              Teeth whitening
-            </span>
-            <i></i>
-            <span>
-              Orthodontics
-            </span>
-            <i></i>
-            <span>
-              Root canal treatment
-            </span>
-            <i></i>
-            <span>
-              Extractions
-            </span>
-            <i></i>
-            <span>
-              Sedation
-            </span>
-            <i></i>
-            <span>
-              Tooth-coloured fillings
-            </span>
-            <i></i>
-            <span>
-              Preventive dentistry
-            </span>
-            <i></i>
-            <span>
-              Hygienist services
-            </span>
-            <i></i>
-            <span>
-              Crowns &amp; bridges
-            </span>
-            <i></i>
-            <span>
-              Dental implants
-            </span>
-            <i></i>
-            <span>
-              Dentures
-            </span>
-            <i></i>
-            <span>
-              Cosmetic dentistry
-            </span>
-            <i></i>
-            <span>
-              Teeth whitening
-            </span>
-            <i></i>
-            <span>
-              Orthodontics
-            </span>
-            <i></i>
-            <span>
-              Root canal treatment
-            </span>
-            <i></i>
-            <span>
-              Extractions
-            </span>
-            <i></i>
-            <span>
-              Sedation
-            </span>
-            <i></i>
-          </div>
-        </div>
         <section className="scene-statement" aria-labelledby="intro-title">
           <div className="stage">
             <div className="wrap">
@@ -469,9 +354,6 @@ export default function Page() {
                     every age
                   </em>
                 </h2>
-                <p className="lead" data-reveal="">
-                  A highly qualified, experienced team in a friendly, relaxed setting, with the latest equipment in a ground-floor practice.
-                </p>
               </div>
             </div>
             <div className="pillars">
@@ -488,17 +370,6 @@ export default function Page() {
               </div>
               <div data-reveal="" style={{ "--d": ".08s" }}>
                 <span className="label">
-                  In-house
-                </span>
-                <h3>
-                  Specialists
-                </h3>
-                <p>
-                  Orthodontics and root canal treatment from clinicians who focus on them.
-                </p>
-              </div>
-              <div data-reveal="" style={{ "--d": ".16s" }}>
-                <span className="label">
                   Nervous patients
                 </span>
                 <h3>
@@ -506,6 +377,17 @@ export default function Page() {
                 </h3>
                 <p>
                   Sedation services are available. Ask the team which options suit you.
+                </p>
+              </div>
+              <div data-reveal="" style={{ "--d": ".16s" }}>
+                <span className="label">
+                  Access
+                </span>
+                <h3>
+                  Ground floor
+                </h3>
+                <p>
+                  Easy access from the street, with free off-street parking nearby.
                 </p>
               </div>
             </div>
@@ -529,6 +411,10 @@ export default function Page() {
                 </div>
                 <p data-reveal="">
                   From routine check-ups to implants and specialist orthodontics.
+                  {" "}
+                  <Link className="tlink" href="/treatments">
+                    All treatments
+                  </Link>
                 </p>
               </div>
             </div>
@@ -646,123 +532,6 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <section className="section tint" style={{ paddingTop: "clamp(2rem,4vw,3rem)" }} aria-label="All treatments">
-          <div className="wrap">
-            <div className="index" data-reveal="">
-              <Link href="/contact" aria-label="Tooth-coloured fillings: ask the practice">
-                <b>
-                  Tooth-coloured fillings
-                </b>
-                <span>
-                  Fillings that match your natural teeth
-                </span>
-              </Link>
-              <Link href="/contact" aria-label="Preventive dentistry: ask the practice">
-                <b>
-                  Preventive dentistry
-                </b>
-                <span>
-                  Care that stops problems before they start
-                </span>
-              </Link>
-              <Link href="/contact" aria-label="Hygienist services: ask the practice">
-                <b>
-                  Hygienist services
-                </b>
-                <span>
-                  Professional cleaning and gum care
-                </span>
-              </Link>
-              <Link href={ROUTES.crowns.path}>
-                <b>
-                  Crowns &amp; bridges
-                </b>
-                <span>
-                  Strengthen damaged teeth or fill gaps
-                </span>
-                <em className="go" aria-hidden="true"></em>
-              </Link>
-              <Link href={ROUTES.implants.path}>
-                <b>
-                  Dental implants
-                </b>
-                <span>
-                  A fixed, long-term replacement for missing teeth
-                </span>
-                <em className="go" aria-hidden="true"></em>
-              </Link>
-              <Link href={ROUTES.dentures.path}>
-                <b>
-                  Dentures
-                </b>
-                <span>
-                  Full and partial dentures, fitted for comfort
-                </span>
-                <em className="go" aria-hidden="true"></em>
-              </Link>
-              <Link href="/contact" aria-label="Cosmetic dentistry: ask the practice">
-                <b>
-                  Cosmetic dentistry
-                </b>
-                <span>
-                  Improve the look of your smile
-                </span>
-              </Link>
-              <Link href="/contact" aria-label="Teeth whitening: ask the practice">
-                <b>
-                  Teeth whitening
-                </b>
-                <span>
-                  Professionally supervised whitening
-                </span>
-              </Link>
-              <Link href="/orthodontics">
-                <b>
-                  Orthodontics
-                </b>
-                <span>
-                  Braces, aligners and lingual braces
-                </span>
-                <i>
-                  Specialist
-                </i>
-              </Link>
-              <Link href={ROUTES.rootCanal.path}>
-                <b>
-                  Root canal treatment
-                </b>
-                <span>
-                  Including complex cases with our endodontists
-                </span>
-                <i>
-                  Specialist
-                </i>
-              </Link>
-              <Link href={ROUTES.extractions.path}>
-                <b>
-                  Extractions
-                </b>
-                <span>
-                  Careful removal when it is the right option
-                </span>
-                <em className="go" aria-hidden="true"></em>
-              </Link>
-              <Link href="/contact" aria-label="Sedation: ask the practice">
-                <b>
-                  Sedation
-                </b>
-                <span>
-                  Support for nervous patients
-                </span>
-              </Link>
-            </div>
-            <div className="more" data-reveal="">
-              <Link className="tlink" href="/treatments">
-                All treatments
-              </Link>
-            </div>
-          </div>
-        </section>
         <section className="section" aria-labelledby="spec-title">
           <div className="wrap">
             <div className="spec">
@@ -809,77 +578,6 @@ export default function Page() {
                     </Link>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="journey">
-              <p className="scene-no" data-reveal="">
-                Referred for NHS orthodontics? What happens next
-              </p>
-              <ol id="journey" data-reveal="">
-                <li>
-                  <span className="step">
-                    Step 1
-                  </span>
-                  <h3>
-                    Referral
-                  </h3>
-                  <p>
-                    Your dentist refers you for an NHS orthodontic assessment. There is currently a long waiting list.
-                  </p>
-                </li>
-                <li>
-                  <span className="step">
-                    Step 2
-                  </span>
-                  <h3>
-                    We contact you
-                  </h3>
-                  <p>
-                    When you come off the waiting list, we contact you to arrange your assessment.
-                  </p>
-                </li>
-                <li>
-                  <span className="step">
-                    Step 3
-                  </span>
-                  <h3>
-                    Assessment
-                  </h3>
-                  <p>
-                    Active treatment is unlikely at this visit. Plans are discussed at later appointments, after further investigations.
-                  </p>
-                </li>
-                <li>
-                  <span className="step">
-                    Step 4
-                  </span>
-                  <h3>
-                    Treatment
-                  </h3>
-                  <p>
-                    If accepted and you go ahead, you commit to frequent appointments, including in work or school time.
-                  </p>
-                </li>
-              </ol>
-              <div className="note">
-                <p data-reveal="">
-                  <b>
-                    Eligibility.
-                  </b>
-                  {" "}
-                  The NHS has strict criteria for funded orthodontics and not every referral qualifies. Patients who do not qualify can choose independent treatment.
-                </p>
-                <p data-reveal="">
-                  <b>
-                    For referring dentists.
-                  </b>
-                  {" "}
-                  We accept NHS and private referrals for orthodontic and endodontic treatment.
-                  {" "}
-                  <Link className="tlink" href="/referrals" style={{ marginLeft: ".25rem" }}>
-                    Referral information
-                  </Link>
-                </p>
               </div>
             </div>
           </div>
@@ -1089,19 +787,6 @@ export default function Page() {
                 </div>
                 <div className="drow">
                   <span className="label">
-                    Email
-                  </span>
-                  <div>
-                    <span className="big" style={{ fontSize: "1.1rem" }}>
-                      collierrowdental@gmail.com
-                    </span>
-                    <button className="copybtn" type="button" data-copy="collierrowdental@gmail.com">
-                      Copy
-                    </button>
-                  </div>
-                </div>
-                <div className="drow">
-                  <span className="label">
                     Hours
                   </span>
                   <div>
@@ -1111,20 +796,14 @@ export default function Page() {
                 </div>
                 <div className="drow">
                   <span className="label">
-                    Parking
+                    Getting here
                   </span>
                   <div>
-                    Free off-street parking nearby, and a paid car park near Tesco.
-                  </div>
-                </div>
-                <div className="drow">
-                  <span className="label">
-                    Buses
-                  </span>
-                  <div>
-                    Stop ET (Collier Row Library): 247 from Barkingside, 252 from Collier Row, 294 from Noak Hill
-                    <br />
-                    Stop WF (Collier Row / Clockhouse Lane): 247 from Romford, 252 from Hornchurch, 294 from Havering
+                    Free parking nearby, and buses 247, 252 and 294 stop close by.
+                    {" "}
+                    <Link className="tlink" href={ROUTES.location.path}>
+                      Map and bus stops
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -1141,7 +820,6 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <CtaBand />
       </main>
     </>
   );

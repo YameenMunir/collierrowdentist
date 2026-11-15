@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import PageHero from "@/components/PageHero";
+import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, dentistJsonLd, pageMetadata } from "@/lib/seo";
 import { PRACTICE } from "@/lib/site";
 import HoursList from "@/components/HoursList";
@@ -9,7 +10,7 @@ import OpenStatus from "@/components/OpenStatus";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Collier Row Dental Practice | 01708 728715",
-  description: "Contact Collier Row Dental Practice at 21 Collier Row Road, Romford RM5 3NR. Telephone 01708 728715. Parking, buses and directions.",
+  description: "Contact Collier Row Dental Practice on 01708 728715 or by email, see today's opening hours, or send a general enquiry.",
 });
 
 const jsonLd = [breadcrumbJsonLd("contact"), dentistJsonLd()];
@@ -25,7 +26,7 @@ export default function Page() {
           position="50% 35%"
           eyebrow="Contact"
           title={<>Contact <em>the practice</em></>}
-          lead="Call, email or visit us at 21 Collier Row Road. For anything urgent, please call."
+          lead="The quickest way to reach us is by phone. For anything urgent, please call."
         />
         <section className="section">
           <div className="wrap">
@@ -82,24 +83,6 @@ export default function Page() {
                       <HoursList />
                     </div>
                   </div>
-                  <div className="drow">
-                    <span className="label">
-                      Parking
-                    </span>
-                    <div>
-                      Free off-street parking nearby, and a paid car park near Tesco.
-                    </div>
-                  </div>
-                  <div className="drow">
-                    <span className="label">
-                      Buses
-                    </span>
-                    <div>
-                      Stop ET (Collier Row Library): 247 from Barkingside, 252 from Collier Row, 294 from Noak Hill
-                      <br />
-                      Stop WF (Collier Row / Clockhouse Lane): 247 from Romford, 252 from Hornchurch, 294 from Havering
-                    </div>
-                  </div>
                 </div>
                 <div className="vbtns">
                   <a className="btn btn-solid" href={PRACTICE.tel}>
@@ -107,9 +90,9 @@ export default function Page() {
                     {" "}
                     <span className="arr" aria-hidden="true"></span>
                   </a>
-                  <a className="btn btn-line" href={PRACTICE.maps.directions} target="_blank" rel="noopener">
-                    Get directions
-                  </a>
+                  <Link className="btn btn-line" href={ROUTES.location.path}>
+                    Map, parking and buses
+                  </Link>
                 </div>
               </div>
             </div>

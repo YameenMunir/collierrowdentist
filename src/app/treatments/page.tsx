@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
 import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -171,7 +170,6 @@ export default function Page() {
             </p>
           </div>
         </section>
-        <CtaBand />
       </main>
     </>
   );

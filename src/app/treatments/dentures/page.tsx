@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
+import ArticleAside from "@/components/ArticleAside";
 import PageHero from "@/components/PageHero";
 import RelatedTreatments from "@/components/RelatedTreatments";
+import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Dentures in Collier Row | Collier Row Dental Practice",
-  description: "There are many options for replacing missing teeth. The most common is a denture (plate) that can be taken in and out of your mouth. Your dentist can ",
+  description: "Full and partial dentures at Collier Row Dental Practice: the stages of having a denture made, getting used to it, and the NHS cost (Band 3).",
 });
 
 const jsonLd = [breadcrumbJsonLd("dentures")];
@@ -27,41 +28,31 @@ export default function Page() {
         />
         <section className="section">
           <div className="wrap article">
-            <aside className="toc" aria-label="On this page">
-              <p className="label">
-                On this page
-              </p>
-              <a href="#overview">
-                Overview
-              </a>
-              <a href="#what-happens">
-                What happens
-              </a>
-              <a href="#after">
-                After treatment
-              </a>
-              <a href="#cost">
-                Cost
-              </a>
-            </aside>
+            <ArticleAside
+              facts={[
+                {
+                  label: "NHS cost",
+                  value: (
+                    <>
+                      Band 3, £332.10{" "}
+                      <Link className="sub" href={ROUTES.prices.path}>
+                        See all charges
+                      </Link>
+                    </>
+                  ),
+                },
+                { label: "Types", value: "Full or partial, removable" },
+                { label: "Visits", value: "Up to five stages, fewer for small dentures" },
+              ]}
+            />
             <div className="prose">
-              <section id="overview">
-                <h2 data-reveal="">
-                  Overview
-                </h2>
-                <p data-reveal="">
-                  There are many options for replacing missing teeth. The most common is a denture (plate) that can be taken in and out of your mouth. Your dentist can advise you on the best type for you.
-                </p>
-                <p className="callout" data-reveal="">
-                  <span>
-                    These are the usual stages in making a denture. They vary between patients, and some may not be needed depending on how many teeth are missing.
-                  </span>
-                </p>
-              </section>
               <section id="what-happens">
                 <h2 data-reveal="">
                   What happens
                 </h2>
+                <p data-reveal="">
+                  Some stages may not be needed, depending on how many teeth are missing.
+                </p>
                 <ol className="steps">
                   <li data-reveal="">
                     <div>
@@ -117,29 +108,16 @@ export default function Page() {
               </section>
               <section id="after">
                 <h2 data-reveal="">
-                  After treatment
+                  Getting used to it
                 </h2>
                 <p data-reveal="">
                   A new denture will feel strange at first. Eating, drinking and speaking may be a little tricky, but this improves as your mouth adapts. If any areas become sore, which is not uncommon, your dentist can adjust the denture to make it more comfortable.
                 </p>
               </section>
-              <section id="cost">
-                <h2 data-reveal="">
-                  Cost
-                </h2>
-                <p data-reveal="">
-                  Dentures are Band 3 treatment on the NHS, as they need lab work.
-                  {" "}
-                  <Link className="tlink" href="/prices">
-                    See NHS charges
-                  </Link>
-                </p>
-              </section>
             </div>
           </div>
         </section>
-        <RelatedTreatments items={["crowns", "implants"]} />
-        <CtaBand />
+        <RelatedTreatments items={["implants", "crowns"]} />
       </main>
     </>
   );

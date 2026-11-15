@@ -1,18 +1,19 @@
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 
+/** One line per treatment that says how it differs from the others, so patients can compare options. */
 const CARDS = {
   crowns: {
     title: "Dental crowns",
-    summary: "A crown is a metal or porcelain cap which sits over the tooth to either change the way it…",
+    summary: "Protects a weakened tooth you still have.",
   },
   implants: {
     title: "Dental implants",
-    summary: "Implants are screws placed in the bone, on which crowns or dentures can be fitted to…",
+    summary: "A fixed replacement for a missing tooth, anchored in the bone.",
   },
   dentures: {
     title: "Dentures",
-    summary: "There are many options for replacing missing teeth. The most common is a denture (plate)…",
+    summary: "A removable replacement for one or more missing teeth.",
   },
 } as const;
 

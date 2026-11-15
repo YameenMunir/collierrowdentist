@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
+import ArticleAside from "@/components/ArticleAside";
 import PageHero from "@/components/PageHero";
 import RelatedTreatments from "@/components/RelatedTreatments";
+import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Dental Crowns in Collier Row | Collier Row Dental Practice",
-  description: "A crown is a metal or porcelain cap which sits over the tooth to either change the way it looks or to protect it from biting forces if it has been wea",
+  description: "Dental crowns at Collier Row Dental Practice: how a crown is made and fitted over two visits, and what it costs on the NHS (Band 3).",
 });
 
 const jsonLd = [breadcrumbJsonLd("crowns")];
@@ -27,38 +28,31 @@ export default function Page() {
         />
         <section className="section">
           <div className="wrap article">
-            <aside className="toc" aria-label="On this page">
-              <p className="label">
-                On this page
-              </p>
-              <a href="#overview">
-                Overview
-              </a>
-              <a href="#what-happens">
-                What happens
-              </a>
-              <a href="#cost">
-                Cost
-              </a>
-            </aside>
+            <ArticleAside
+              facts={[
+                {
+                  label: "NHS cost",
+                  value: (
+                    <>
+                      Band 3, £332.10{" "}
+                      <Link className="sub" href={ROUTES.prices.path}>
+                        See all charges
+                      </Link>
+                    </>
+                  ),
+                },
+                { label: "Visits", value: "Two, about a week apart" },
+                { label: "Made by", value: "A dental laboratory, to fit your tooth" },
+              ]}
+            />
             <div className="prose">
-              <section id="overview">
-                <h2 data-reveal="">
-                  Overview
-                </h2>
-                <p data-reveal="">
-                  A crown is a metal or porcelain cap which sits over the tooth to either change the way it looks or to protect it from biting forces if it has been weakened by decay.
-                </p>
-                <p className="callout" data-reveal="">
-                  <span>
-                    This is a general outline of what happens if you decide to have a crown. It can vary between teeth and patients.
-                  </span>
-                </p>
-              </section>
               <section id="what-happens">
                 <h2 data-reveal="">
                   What happens
                 </h2>
+                <p data-reveal="">
+                  A general outline. It can vary between teeth and patients.
+                </p>
                 <ol className="steps">
                   <li data-reveal="">
                     <div>
@@ -86,7 +80,7 @@ export default function Page() {
                         Taking moulds
                       </h3>
                       <p>
-                        The crown is made in a dental laboratory. So the technician can make a crown tailored to your tooth, your dentist takes moulds of your top and bottom teeth. The material starts runny and becomes rubbery as it sets. It is not painful, but can feel like a bit of a mouthful.
+                        So the laboratory can make a crown tailored to your tooth, your dentist takes moulds of your top and bottom teeth. The material starts runny and becomes rubbery as it sets. It is not painful, but can feel like a bit of a mouthful.
                       </p>
                     </div>
                   </li>
@@ -112,23 +106,10 @@ export default function Page() {
                   </li>
                 </ol>
               </section>
-              <section id="cost">
-                <h2 data-reveal="">
-                  Cost
-                </h2>
-                <p data-reveal="">
-                  Crowns are Band 3 treatment on the NHS, as they need lab work.
-                  {" "}
-                  <Link className="tlink" href="/prices">
-                    See NHS charges
-                  </Link>
-                </p>
-              </section>
             </div>
           </div>
         </section>
         <RelatedTreatments items={["implants", "dentures"]} />
-        <CtaBand />
       </main>
     </>
   );

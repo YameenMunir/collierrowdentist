@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import ArticleAside from "@/components/ArticleAside";
 import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
+import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -26,43 +28,33 @@ export default function Page() {
         />
         <section className="section">
           <div className="wrap article">
-            <aside className="toc" aria-label="On this page">
-              <p className="label">
-                On this page
-              </p>
-              <a href="#braces">
-                About braces
-              </a>
-              <a href="#treatment">
-                During treatment
-              </a>
-              <a href="#nhs">
-                NHS orthodontic patients
-              </a>
-              <a href="#eligibility">
-                Eligibility
-              </a>
-              <a href="#not-eligible">
-                If you do not qualify
-              </a>
-              <a href="#questions">
-                Questions
-              </a>
-            </aside>
+            <ArticleAside
+              facts={[
+                {
+                  label: "Specialist",
+                  value: <Link href={`${ROUTES.team.path}#amish-patel`}>Dr Amish Patel</Link>,
+                },
+                { label: "How to start", value: "Ask your dentist for a referral" },
+                { label: "Adjustments", value: "About every six weeks" },
+                { label: "On the NHS", value: "Strict criteria and a long waiting list" },
+              ]}
+              toc={[
+                { href: "#braces", label: "Getting started" },
+                { href: "#treatment", label: "During treatment" },
+                { href: "#nhs", label: "NHS patients" },
+                { href: "#eligibility", label: "Who qualifies" },
+              ]}
+            />
             <div className="prose">
               <section id="braces">
                 <h2 data-reveal="">
-                  About braces
+                  Getting started
                 </h2>
                 <p data-reveal="">
-                  We offer a wide range of braces, including aesthetic braces, near-invisible aligners and lingual braces, which are fixed to the back of your teeth. If you are interested, talk to your dentist, who will refer you to an appropriate dentist for an assessment and a discussion of your options.
+                  Talk to your dentist, who will refer you to an appropriate clinician for an assessment and a discussion of your options. Lingual braces are fixed to the back of your teeth, so they cannot be seen from the front.
                 </p>
                 <p data-reveal="">
                   Dr Amish Patel is on the specialist register for orthodontics and has an interest in clear braces.
-                  {" "}
-                  <Link className="tlink" href="/team#amish-patel">
-                    Meet Dr Amish Patel
-                  </Link>
                 </p>
               </section>
               <section id="treatment">
@@ -91,13 +83,13 @@ export default function Page() {
                   NHS orthodontic patients
                 </h2>
                 <p data-reveal="">
-                  If your dentist has referred you for an orthodontic assessment under the NHS, this is what happens next.
+                  If your dentist has referred you for an NHS orthodontic assessment, this is what happens next.
                 </p>
                 <ol className="steps">
                   <li data-reveal="">
                     <div>
                       <h3>
-                        Referral and waiting list
+                        Waiting list
                       </h3>
                       <p>
                         There is currently a long waiting list for treatment under the NHS.
@@ -146,69 +138,24 @@ export default function Page() {
               </section>
               <section id="eligibility">
                 <h2 data-reveal="">
-                  Eligibility for NHS treatment
+                  Who qualifies for NHS treatment
                 </h2>
+                <p data-reveal="">
+                  The NHS has very strict criteria, and not every patient referred is accepted.
+                </p>
                 <div data-reveal="">
                   <ul>
                     <li>
-                      The NHS has very strict criteria on the patients we can accept for NHS-funded orthodontics.
+                      Spaces between the teeth or slightly crooked teeth usually do not qualify.
                     </li>
                     <li>
-                      Not all patients referred qualify and are accepted for NHS orthodontic treatment.
-                    </li>
-                    <li>
-                      Cases such as spaces between the teeth or slightly crooked teeth usually do not qualify.
-                    </li>
-                    <li>
-                      Patients with poor oral hygiene or poor oral health (for example cavities, poor plaque control or gingivitis) will not be accepted for treatment.
+                      Patients with poor oral hygiene or poor oral health (for example cavities, poor plaque control or gingivitis) will not be accepted, on the NHS or independently.
                     </li>
                   </ul>
                 </div>
-              </section>
-              <section id="not-eligible">
-                <h2 data-reveal="">
-                  If you do not qualify
-                </h2>
                 <p data-reveal="">
-                  If you would still like orthodontic treatment, you can choose to self-fund it on an independent basis. We cannot provide orthodontic treatment for patients with poor oral hygiene or poor dental health.
+                  <b>If you do not qualify,</b> you can choose to self-fund orthodontic treatment on an independent basis.
                 </p>
-              </section>
-              <section id="questions">
-                <h2 data-reveal="">
-                  Questions
-                </h2>
-                <div className="qlist">
-                  <div className="qa" data-reveal="" style={{ "--d": "0.00s" }}>
-                    <h3 style={{ margin: "0" }}>
-                      <button type="button" aria-expanded="false" aria-controls="qa-0">
-                        Will I qualify for NHS orthodontic treatment?
-                        <span className="pm" aria-hidden="true"></span>
-                      </button>
-                    </h3>
-                    <div className="reveal-body" id="qa-0">
-                      <div>
-                        <p>
-                          The NHS has very strict criteria. Spaces between the teeth or slightly crooked teeth usually do not qualify, and patients with poor oral hygiene or poor oral health will not be accepted. If you do not qualify, you can choose to self-fund treatment on an independent basis.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="qa" data-reveal="" style={{ "--d": "0.04s" }}>
-                    <h3 style={{ margin: "0" }}>
-                      <button type="button" aria-expanded="false" aria-controls="qa-1">
-                        What happens if I miss a specialist appointment?
-                        <span className="pm" aria-hidden="true"></span>
-                      </button>
-                    </h3>
-                    <div className="reveal-body" id="qa-1">
-                      <div>
-                        <p>
-                          Specialist appointments are extremely limited. If you miss an orthodontic assessment or an endodontic appointment, you will be discharged back to your referring dentist.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </section>
             </div>
           </div>

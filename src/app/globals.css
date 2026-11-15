@@ -533,6 +533,15 @@ html.menu-open,html.menu-open body{overflow:hidden}
 /* ---------- Articles ---------- */
 .article{display:grid;grid-template-columns:230px minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:start}
 .toc{position:sticky;top:120px;display:grid;gap:.2rem}
+.aside{position:sticky;top:120px;display:grid;gap:2.75rem}
+.aside .toc{position:static}
+.facts-wrap .label{margin-bottom:.9rem}
+.facts{margin:0;display:grid;border-top:1px solid var(--line)}
+.facts>div{display:grid;gap:.3rem;padding:.85rem 0;border-bottom:1px solid var(--line)}
+.facts dt{font:400 .7rem/1.3 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.facts dd{margin:0;color:var(--ink);font-size:.95rem;line-height:1.45}
+.facts dd .sub{display:block;margin-top:.2rem;color:var(--muted);font-size:.85rem}
+.facts dd a{color:var(--brand-2);text-underline-offset:3px}
 .toc .label{margin-bottom:.9rem}
 .toc a{display:block;padding:.45rem 0 .45rem 1rem;border-left:1px solid var(--line);color:var(--muted);text-decoration:none;font-size:.92rem;transition:color .3s,border-color .3s}
 .toc a:hover,.toc a.on{color:var(--ink);border-left-color:var(--brand)}
@@ -739,8 +748,9 @@ html.menu-open .totop{opacity:0;pointer-events:none}
 }
 @media (max-width:900px){
   .head,.intro-grid,.spec,.prices,.faq,.enquire,.contact-grid,.article,.tgroup{grid-template-columns:1fr}
-  .spec-media,.prices .left,.toc{position:static}
+  .spec-media,.prices .left,.toc,.aside{position:static}
   .toc{display:none}
+  .facts{grid-template-columns:1fr 1fr;column-gap:1.5rem}
   .intro-grid .frame{aspect-ratio:4/3}
   .spec-media .frame{aspect-ratio:16/11}
   .pillars{grid-template-columns:1fr}

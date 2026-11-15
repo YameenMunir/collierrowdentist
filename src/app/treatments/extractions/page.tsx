@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
+import ArticleAside from "@/components/ArticleAside";
 import PageHero from "@/components/PageHero";
 import RelatedTreatments from "@/components/RelatedTreatments";
+import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Tooth Extractions in Collier Row | Collier Row Dental Practice",
-  description: "Sometimes, despite every best effort, a tooth cannot be saved. Especially if it is causing pain or discomfort, it is best to have it taken out.",
+  description: "Tooth extractions at Collier Row Dental Practice: what to expect, aftercare, when you may be referred to hospital, and the NHS cost (Band 2).",
 });
 
 const jsonLd = [breadcrumbJsonLd("extractions")];
@@ -27,34 +28,27 @@ export default function Page() {
         />
         <section className="section">
           <div className="wrap article">
-            <aside className="toc" aria-label="On this page">
-              <p className="label">
-                On this page
-              </p>
-              <a href="#overview">
-                Overview
-              </a>
-              <a href="#what-happens">
-                What happens
-              </a>
-              <a href="#cost">
-                Cost
-              </a>
-            </aside>
+            <ArticleAside
+              facts={[
+                {
+                  label: "NHS cost",
+                  value: (
+                    <>
+                      Band 2, £76.60{" "}
+                      <Link className="sub" href={ROUTES.prices.path}>
+                        See all charges
+                      </Link>
+                    </>
+                  ),
+                },
+                { label: "What you feel", value: "Pressure, but no pain" },
+                {
+                  label: "Complex cases",
+                  value: "Difficult teeth, or a medical risk, may mean referral to hospital specialists",
+                },
+              ]}
+            />
             <div className="prose">
-              <section id="overview">
-                <h2 data-reveal="">
-                  Overview
-                </h2>
-                <p data-reveal="">
-                  Sometimes, despite every best effort, a tooth cannot be saved. Especially if it is causing pain or discomfort, it is best to have it taken out.
-                </p>
-                <p className="callout" data-reveal="">
-                  <span>
-                    If the tooth is complicated to remove, or your medical history carries another risk, your dentist may refer you to hospital to have it removed by specialists.
-                  </span>
-                </p>
-              </section>
               <section id="what-happens">
                 <h2 data-reveal="">
                   What happens
@@ -92,23 +86,10 @@ export default function Page() {
                   </li>
                 </ol>
               </section>
-              <section id="cost">
-                <h2 data-reveal="">
-                  Cost
-                </h2>
-                <p data-reveal="">
-                  Extractions are Band 2 treatment on the NHS.
-                  {" "}
-                  <Link className="tlink" href="/prices">
-                    See NHS charges
-                  </Link>
-                </p>
-              </section>
             </div>
           </div>
         </section>
-        <RelatedTreatments items={["crowns", "implants"]} />
-        <CtaBand />
+        <RelatedTreatments items={["implants", "dentures"]} />
       </main>
     </>
   );

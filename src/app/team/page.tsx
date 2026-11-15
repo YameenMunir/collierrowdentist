@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -26,32 +25,6 @@ export default function Page() {
         />
         <section className="section">
           <div className="wrap">
-            <div className="team-stats" data-reveal="">
-              <div>
-                <b className="num" data-count="8">
-                  8
-                </b>
-                <span>
-                  Clinicians
-                </span>
-              </div>
-              <div>
-                <b className="num" data-count="2">
-                  2
-                </b>
-                <span>
-                  Orthodontic clinicians
-                </span>
-              </div>
-              <div>
-                <b className="num" data-count="2">
-                  2
-                </b>
-                <span>
-                  Endodontists
-                </span>
-              </div>
-            </div>
             <div className="chips" role="group" aria-label="Filter the team" data-reveal="">
               <button type="button" className="chip on" data-filter="all" aria-pressed="true">
                 All clinicians
@@ -216,7 +189,6 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <CtaBand />
       </main>
     </>
   );

@@ -4,19 +4,16 @@ import { ROUTES } from "@/lib/routes";
 import { PRACTICE } from "@/lib/site";
 
 interface CtaBandProps {
-  title?: ReactNode;
-  text?: ReactNode;
+  title: ReactNode;
+  text: ReactNode;
 }
 
-/** The closing "Next scene" call-to-action band: call the practice or send an enquiry. */
-export default function CtaBand({
-  title = (
-    <>
-      Ready when <em>you are.</em>
-    </>
-  ),
-  text = "Call the practice and the reception team will find a time that suits you.",
-}: CtaBandProps) {
+/**
+ * The closing "Next scene" call-to-action band: call the practice or send an enquiry.
+ * Only use it where the page has a specific next step to offer; the footer already
+ * carries the practice phone number on every page.
+ */
+export default function CtaBand({ title, text }: CtaBandProps) {
   return (
     <section className="cta">
       <div className="wrap">

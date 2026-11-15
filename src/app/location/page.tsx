@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { PRACTICE } from "@/lib/site";
@@ -96,7 +95,6 @@ export default function Page() {
                   Easy to reach, <em>by car or bus</em>
                 </h2>
               </div>
-              <p data-reveal="">Everything you need to plan your journey to Collier Row Road.</p>
             </div>
             <div className="pillars">
               <div data-reveal="">
@@ -116,13 +114,11 @@ export default function Page() {
               <div data-reveal="" style={{ "--d": ".16s" }}>
                 <span className="label">Access</span>
                 <h3>Ground floor</h3>
-                <p>The practice is on the ground floor.</p>
+                <p>The practice is on the ground floor with easy access.</p>
               </div>
             </div>
           </div>
         </section>
-
-        <CtaBand />
       </main>
     </>
   );
